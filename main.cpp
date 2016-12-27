@@ -121,7 +121,8 @@ public:
 vector<AABB> aabbs;
 
 void genCloud(
-    const int N, const float RX, const float RY,
+    const int N,
+    const float RX, const float RY,
     const float MIN_HUMP_RAD,
     const float MAX_HUMP_RAD,
     const float HUMP_RAND
@@ -257,51 +258,149 @@ void genCloud(
 }
 
 int main(int argc, char** argv) {
-    int SEED = 1;
+    int SEED = 0;
     srand(SEED);
 
-    defStr +=
-        "<linearGradient id=\"cloudGradient\"  x1=\"0\" x2=\"0\" y1=\"0\" y2=\"1\" >"
-        "<stop offset=\"0%\" stop-color=\"white\"/>"
-        "<stop offset=\"100%\" stop-color=\"#8888bb\"/>"
-        "</linearGradient>";
+    // 0: blue_sky.svg
+    // 1: dawn.svg
+    // 2: storm.svg
+    // 3: night.svg
+    int TYPE = 0;
 
-    defStr +=
-        "<linearGradient id=\"backgroundGradient\"  x1=\"0\" x2=\"0\" y1=\"0\" y2=\"1\" >"
-        "<stop offset=\"0%\" stop-color=\"#559dcc\"/>"
-        "<stop offset=\"50%\" stop-color=\"#559dcc\"/>"
+    if(TYPE == 0) {
+        // blue_sky.svg
 
-        "<stop offset=\"100%\" stop-color=\"#99dfee\"/>"
-        "</linearGradient>";
+        defStr +=
+            "<linearGradient id=\"cloudGradient\"  x1=\"0\" x2=\"0\" y1=\"0\" y2=\"1\" >"
+            "<stop offset=\"0%\" stop-color=\"#ffffff\"/>"
+            "<stop offset=\"50%\" stop-color=\"#ffffff\"/>"
+            "<stop offset=\"100%\" stop-color=\"#8888bb\"/>"
+            "</linearGradient>";
+        defStr +=
+            "<linearGradient id=\"backgroundGradient\"  x1=\"0\" x2=\"0\" y1=\"0\" y2=\"1\" >"
+            "<stop offset=\"0%\" stop-color=\"#559dcc\"/>"
+            "<stop offset=\"50%\" stop-color=\"#559dcc\"/>"
 
-/*
-  while(aabbs.size() < 3 ) {
-  genCloud(int(randFloat(6,9)), // humps.
-  randFloat(130.0f,150.0f), randFloat(80.0f,90.0f), // ellipse radius,
-  randFloat(50.0f,60.0f), randFloat(70.0f,80.0f), // hump radius
-  randFloat(20.0f, 40.0f) // hump rand.
-  );
-  }
+            "<stop offset=\"100%\" stop-color=\"#99dfee\"/>"
+            "</linearGradient>";
+        while(aabbs.size() < 8 ) {
+            genCloud(int(randFloat(6,9)), // humps.
+                     randFloat(75.0f,130.0f), // ellipse width
+                     randFloat(50.0f,65.0f), // ellipse height
+                     randFloat(29.0f,39.0f), randFloat(40.0f,48.0f), // hump radius
+                     randFloat(17.0f, 27.0f) // hump rand.
+                );
+        }
+        while(aabbs.size() < 21 ) {
+            genCloud(int(randFloat(6,9)), // humps.
+                     randFloat(40.0f,80.0f), // ellipse width
+                     randFloat(20.0f,35.0f), // ellipse height,
+                     randFloat(14.0f,16.0f), randFloat(22.0f,24.0f), // hump radius
+                     randFloat(4.0f, 9.0f) // hump rand.
+                );
+        }
+    } else if(TYPE == 1) {
+        defStr +=
+            "<linearGradient id=\"cloudGradient\"  x1=\"0\" x2=\"0\" y1=\"0\" y2=\"1\" >"
+            "<stop offset=\"0%\" stop-color=\"#aaaaaa\"/>"
+            "<stop offset=\"100%\" stop-color=\"#cc7777\"/>"
+            "</linearGradient>";
+        defStr +=
+            "<linearGradient id=\"backgroundGradient\"  x1=\"0\" x2=\"0\" y1=\"0\" y2=\"1\" >"
+            "<stop offset=\"0%\" stop-color=\"#8E728B\"/>"
 
-*/
-    while(aabbs.size() < 8 ) {
-        genCloud(int(randFloat(6,9)), // humps.
-                 randFloat(80.0f,100.0f), randFloat(50.0f,60.0f), // ellipse radius,
-                 randFloat(29.0f,39.0f), randFloat(40.0f,48.0f), // hump radius
-                 randFloat(17.0f, 27.0f) // hump rand.
-            );
+            "<stop offset=\"65%\" stop-color=\"#8E728B\"/>"
+
+            "<stop offset=\"100%\" stop-color=\"#FC8F5F\"/>"
+            "</linearGradient>";
+
+        while(aabbs.size() < 15 ) {
+            genCloud(int(randFloat(7,11)), // humps.
+                     randFloat(80.0f,120.0f), // ellipse width
+                     randFloat(20.0f,35.0f), // ellipse height,
+                     randFloat(19.0f,21.0f), randFloat(24.0f,25.0f), // hump radius
+                     randFloat(4.0f, 9.0f) // hump rand.
+                );
+        }
+
+        while(aabbs.size() < 25 ) {
+            genCloud(int(randFloat(5,7)), // humps.
+                     randFloat(30.0f,50.0f), // ellipse width
+                     randFloat(20.0f,40.0f), // ellipse height,
+                     randFloat(15.0f,17.0f), randFloat(27.0f,29.0f), // hump radius
+                     randFloat(8.0f, 12.0f) // hump rand.
+                );
+        }
+    } else if(TYPE == 2) {
+        defStr +=
+            "<linearGradient id=\"cloudGradient\"  x1=\"0\" x2=\"0\" y1=\"0\" y2=\"1\" >"
+            "<stop offset=\"0%\" stop-color=\"#aaaaaa\"/>"
+            "<stop offset=\"10%\" stop-color=\"#aaaaaa\"/>"
+
+            "<stop offset=\"80%\" stop-color=\"#444444\"/>"
+
+            "<stop offset=\"100%\" stop-color=\"#333333\"/>"
+            "</linearGradient>";
+        defStr +=
+            "<linearGradient id=\"backgroundGradient\"  x1=\"0\" x2=\"0\" y1=\"0\" y2=\"1\" >"
+            "<stop offset=\"0%\" stop-color=\"#ffffff\"/>"
+            "<stop offset=\"50%\" stop-color=\"#777777\"/>"
+            "<stop offset=\"100%\" stop-color=\"#aaaaaa\"/>"
+
+            "</linearGradient>";
+        while(aabbs.size() < 3 ) {
+            genCloud(int(randFloat(8,13)), // humps.
+                     randFloat(170.0f,260.0f), // ellipse width
+                     randFloat(80.0f,120.0f), // ellipse height
+                     randFloat(39.0f,40.0f), randFloat(60.0f,70.0f), // hump radius
+                     randFloat(17.0f, 27.0f) // hump rand.
+                );
+        }
+
+        while(aabbs.size() < 12 ) {
+            genCloud(int(randFloat(6,9)), // humps.
+                     randFloat(40.0f,80.0f), // ellipse width
+                     randFloat(20.0f,35.0f), // ellipse height,
+                     randFloat(14.0f,16.0f), randFloat(22.0f,24.0f), // hump radius
+                     randFloat(4.0f, 9.0f) // hump rand.
+                );
+        }
+
+        while(aabbs.size() < 15 ) {
+            genCloud(int(randFloat(6,11)), // humps.
+                     randFloat(110.0f,160.0f), // ellipse width
+                     randFloat(20.0f, 50.0f), // ellipse height,
+                     randFloat(19.0f,21.0f), randFloat(27.0f,29.0f), // hump radius
+                     randFloat(10.0f, 19.0f) // hump rand.
+                );
+        }
+    } else if( TYPE == 3) {
+        defStr +=
+            "<linearGradient id=\"cloudGradient\"  x1=\"0\" x2=\"0\" y1=\"0\" y2=\"1\" >"
+              "<stop offset=\"10%\" stop-color=\"#666699\"/>"
+            "<stop offset=\"50%\" stop-color=\"#444488\"/>"
+
+            "</linearGradient>";
+        defStr +=
+            "<linearGradient id=\"backgroundGradient\"  x1=\"0\" x2=\"0\" y1=\"0\" y2=\"1\" >"
+            "<stop offset=\"0%\" stop-color=\"#000055\"/>"
+            "<stop offset=\"100%\" stop-color=\"#333355\"/>"
+
+            "</linearGradient>";
+
+        while(aabbs.size() < 12 ) {
+            genCloud(int(randFloat(4,12)), // humps.
+                     randFloat(40.0f,80.0f), // ellipse width
+                     randFloat(20.0f,35.0f), // ellipse height,
+                     randFloat(17.0f,20.0f), randFloat(23.0f,27.0f), // hump radius
+                     randFloat(4.0f, 9.0f) // hump rand.
+                );
+        }
     }
 
-    while(aabbs.size() < 21 ) {
-        genCloud(int(randFloat(6,9)), // humps.
-                 randFloat(45.0f,60.0f), randFloat(20.0f,30.0f), // ellipse radius,
-                 randFloat(14.0f,16.0f), randFloat(22.0f,24.0f), // hump radius
-                 randFloat(4.0f, 9.0f) // hump rand.
-            );
-    }
 
     //
-    // We created all clouds and gradient. Now just output the SVG.
+    // We have created all clouds and gradients. Now just output the SVG.
     //
 
     FILE* fp;

@@ -257,7 +257,19 @@ void genCloud(
     }
 }
 
+// prints out arguments and then exits
+void showUsage(){
+  printf("\n--type\tgenerates given type\n");
+  printf("\t0 - blue_sky (default)\n");
+  printf("\t1 - dawn\n");
+  printf("\t2 - storm\n");
+  printf("\t3 - night\n\n");
+  exit(1);
+}
+
 int main(int argc, char** argv) {
+    int i = 0;
+    std::string arg;
     int SEED = 0;
     srand(SEED);
 
@@ -267,8 +279,23 @@ int main(int argc, char** argv) {
     // 3: night.svg
     int TYPE = 0;
 
-    if(TYPE == 0) {
-        // blue_sky.svg
+    // argument checker
+    for (i = 0; i < argc; i++) {
+      arg = string(argv[i]);
+
+      if ((arg == "-h") || (arg == "--help")) {
+	showUsage();
+      } else if (arg == "--type" ){
+	if (i != argc - 1) { //checks there is a value after
+	    TYPE = atoi(argv[++i]);
+	} else {
+	    showUsage();
+	}
+      }
+    }
+
+    if(TYPE == 0 || TYPE > 3) {
+        // blue_sky.svg (default)
 
         defStr +=
             "<linearGradient id=\"cloudGradient\"  x1=\"0\" x2=\"0\" y1=\"0\" y2=\"1\" >"
@@ -374,7 +401,7 @@ int main(int argc, char** argv) {
                      randFloat(10.0f, 19.0f) // hump rand.
                 );
         }
-    } else if( TYPE == 3) {
+    } else if(TYPE == 3) {
         defStr +=
             "<linearGradient id=\"cloudGradient\"  x1=\"0\" x2=\"0\" y1=\"0\" y2=\"1\" >"
               "<stop offset=\"10%\" stop-color=\"#666699\"/>"

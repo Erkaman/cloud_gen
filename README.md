@@ -22,13 +22,22 @@ You can now generate an SVG with clouds by doing
 ./cloud_gen > out.svg
 ```
 
-By changing the variable
+By passing in a variable
 
 ```
-int TYPE = 0;
+./cloud_gen --type 1
 ```
 
-in `main.cpp` you can generate different kinds of clouds.
+you can generate different kinds of clouds.
+
+` --type 0 ` blue sky (default)
+
+` --type 1 ` dawn
+
+` --type 2 ` storm
+
+` --type 3 ` night
+
 
 ## How Does this Work?
 
